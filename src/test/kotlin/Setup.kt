@@ -102,7 +102,7 @@ class Setup {
                     val exampleInput = extractor(lines)
                     inputFile.writeText(exampleInput)
                 } catch (ex: Exception) {
-                    throw RuntimeException("Could not download $url file for ${day.toInt()} of $aocYear", ex)
+                    System.err.println("Could not download $url file for ${day.toInt()} of $aocYear")
                 }
             } else {
                 System.err.println("Skipping input download, because no sessionid file is found")
