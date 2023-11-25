@@ -29,9 +29,9 @@ class Setup {
         createIfNotExists(dir.absolutePath + "/example.in")
         createIfNotExists(dir.absolutePath + "/example.check1")
 
-        downloadMyInput(stringDayNumber, AOC_YEAR)
-
         copyCodeFromSampleToPart1(stringDayNumber)
+
+        downloadMyInput(stringDayNumber, AOC_YEAR)
     }
 
     fun startDayPart2(dayNumber: Int) {
@@ -102,7 +102,7 @@ class Setup {
                     val exampleInput = extractor(lines)
                     inputFile.writeText(exampleInput)
                 } catch (ex: Exception) {
-                    System.err.println("Could not download $url file for ${day.toInt()} of $aocYear")
+                    throw RuntimeException("Could not download $url file for ${day.toInt()} of $aocYear", ex)
                 }
             } else {
                 System.err.println("Skipping input download, because no sessionid file is found")
