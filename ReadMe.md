@@ -1,6 +1,6 @@
 # Advent of Code 2023 in Kotlin
 ## Setup
-- Clone this repository from https://github.com/martinweu/aoc2023/releases/tag/Skeleton 
+- Clone this repository from https://github.com/martinweu/aoc2023/tree/skeleton
 - Open it up with IntelliJ and make sure gradle is initialized.
 
 ## How to use
