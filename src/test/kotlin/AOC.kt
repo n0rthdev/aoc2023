@@ -26,7 +26,15 @@ class AOC {
 
     private fun runForFile(day: String, part: String, filename: String, checkMandatory: Boolean) {
         val root = "puzzles"
-        val input = File("$root/$day/$filename.in")
+        val partSpecificInput = File("$root/$day/$filename.in$part")
+
+        val input = if (partSpecificInput.exists()) {
+            System.err.println("Using part specific input file ${partSpecificInput.name}")
+            partSpecificInput
+        } else {
+            File("$root/$day/$filename.in")
+        }
+
         val output = File("$root/$day/$filename.out$part")
         val check = File("$root/$day/$filename.check$part")
 

@@ -20,7 +20,8 @@
 - the daily puzzle input/outputs are in the puzzle folder
 - each day has its own folder named with the two digit day number
 - input for both parts of each advent of code day usually are the same, so there are `example.in` and `my.in`
-- you need to copy the example input into `example.in` yourself. if you supplied the sessionid `my.in` will be dowloaded by the setup
+  -  if they are not you can just create an `example.in2` or `my.in2` which would be picked up instead. 
+- you need to copy the example input into `example.in` yourself. if you supplied the sessionid `my.in` will be downloaded by the setup 
 - the provided solutions for the examples go into `example.check1` for part1 and `example.check2` respectively
 - outputs are added to the `my/example.out1` for part1 and `my/example.out2`
 
