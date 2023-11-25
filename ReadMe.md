@@ -1,9 +1,13 @@
 # Advent of Code 2023 in Kotlin
+
 ## Setup
 - Clone this repository from https://github.com/martinweu/aoc2023/tree/skeleton
 - Open it up with IntelliJ and make sure gradle is initialized.
 
 ## How to use
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/cIeYnhMZ4QM/0.jpg)](https://www.youtube.com/watch?v=cIeYnhMZ4QM)
+
 - Use the two test cases in the Setup-Test to set up the day specified as `DAY_TO_SETUP`
 - Use the two test cases in the AOC to run the day and part specified as `PUZZLE` in `Main.kt`
 - IntelliJ Run-Configurations for all four of the above actions are supplied
