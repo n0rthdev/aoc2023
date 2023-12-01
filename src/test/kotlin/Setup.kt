@@ -26,7 +26,7 @@ class Setup {
             dir.mkdir()
         }
 
-        createIfNotExists(dir.absolutePath + "/example.in")
+        createIfNotExists(dir.absolutePath + "/example.in1")
         createIfNotExists(dir.absolutePath + "/example.check1")
 
         copyCodeFromSampleToPart1(stringDayNumber)
@@ -38,6 +38,7 @@ class Setup {
         val stringDayNumber = "%02d".format(dayNumber)
         val dir = File("puzzles/" + stringDayNumber)
 
+        createIfNotExists(dir.absolutePath + "/example.in2")
         createIfNotExists(dir.absolutePath + "/example.check2")
         copyCodeFromPart1ToPart2(stringDayNumber)
     }
