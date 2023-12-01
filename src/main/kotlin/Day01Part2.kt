@@ -28,8 +28,7 @@ class Day01Part2 : LinesPuzzle() {
             val numbers = mutableListOf<Int>()
 
             for (i in range(0, line.length)) {
-
-                if (line[i].isDigit() && line[i] != '0') {
+                if (line[i].isDigit()) {
                     numbers.add(line[i].code - '0'.code)
                 } else {
                     val parsedNumber = translationMap.keys.firstOrNull { line.substring(i).startsWith(it) }
