@@ -10,7 +10,7 @@ class Day01Part1 : LinesPuzzle() {
     override fun solve(lines: List<String>): String {
         return lines.sumOf {
             val digits = it.toCharArray().filter {
-                it >= '0' && it <= '9'
+                it.isDigit()
             }
             "${digits.first()}${digits.last()}".toLong()
         }.toString()
