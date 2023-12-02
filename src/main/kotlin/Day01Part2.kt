@@ -1,5 +1,4 @@
 import structure.LinesPuzzle
-import java.util.stream.IntStream.range
 
 class Day01Part2 : LinesPuzzle() {
 
