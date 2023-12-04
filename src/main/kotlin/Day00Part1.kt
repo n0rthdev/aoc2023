@@ -1,9 +1,8 @@
-import structure.ScannerPuzzle
-import java.util.*
+import structure.LinesPuzzle
 
-class Day00Part1 : ScannerPuzzle() {
-    override fun solve(scanner: Scanner): String {
-        TODO("$name is not yet implemented")
+class Day00Part1 : LinesPuzzle() {
+    override fun solve(lines: List<String>): String {
+        TODO("Not yet implemented")
     }
 
     companion object {
