@@ -27,8 +27,6 @@ class Day05Part1 : LinesPuzzle() {
             it.sortBy { it.src }
         }
 
-        var pos = 0
-
         var stageSeeds = seeds
 
         game.forEach {stage ->
@@ -47,7 +45,7 @@ class Day05Part1 : LinesPuzzle() {
                             newStageSeeds.add(currentSeed)
                             i++
                         }
-                        else if(currentSeed >= currentStage.src && currentSeed <= currentStage.srcEnd) {
+                        else if(currentSeed <= currentStage.srcEnd) {
                             newStageSeeds.add(currentSeed + currentStage.translate)
                             i++
                         }
@@ -64,10 +62,8 @@ class Day05Part1 : LinesPuzzle() {
     }
 
     companion object {
-        data class Myrange(val src : Long, val dest : Long, val spread : Long)
-        {
+        data class Myrange(val src : Long, val dest : Long, val spread : Long){
             val srcEnd get() = src + spread - 1
-            val destEnd get() = dest + spread - 1
             val translate get() = dest - src
         }
     }

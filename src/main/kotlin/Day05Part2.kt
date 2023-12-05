@@ -5,7 +5,6 @@ class Day05Part2 : LinesPuzzle() {
         val seeds = lines[0].substringAfter("seeds: ").split(" ").map { it.toLong() }
             .windowed(2, 2)
             .map { MyRange(it[0], it[1]) }
-//            .flatMap { range(it.first, it.first + it.second).toList() }
             .toList().sortedBy { it.start }
 
         var lineIdx = 2
@@ -47,16 +46,8 @@ class Day05Part2 : LinesPuzzle() {
                         if(intersect[0].spread > 0) {
                             newStageSeeds.add(intersect[0])
                         }
-                        else
-                        {
-                            println("asdf")
-                        }
                         if(intersect[1].spread > 0) {
                             newStageSeeds.add(intersect[1].add(currentStage.translate))
-                        }
-                        else
-                        {
-                            println("asdf")
                         }
                         if(intersect[2].spread > 0) {
                             stageSeeds[i] = intersect[2]
@@ -75,7 +66,6 @@ class Day05Part2 : LinesPuzzle() {
             stageSeeds = newStageSeeds.sortedBy { it.start }.toMutableList()
         }
 
-
         return stageSeeds.minOf{it.start}.toString();
     }
 
@@ -85,7 +75,6 @@ class Day05Part2 : LinesPuzzle() {
             val end get() = start + spread
 
             fun add(add: Long) = MyRange(start + add, spread)
-
 
             fun splitBy(other: MyRange): List<MyRange> {
 
@@ -114,7 +103,6 @@ class Day05Part2 : LinesPuzzle() {
             val translate get() = dest - src
 
             val srcRange get() = MyRange(src, spread)
-            val destRange get() = MyRange(dest, spread)
         }
     }
 }
