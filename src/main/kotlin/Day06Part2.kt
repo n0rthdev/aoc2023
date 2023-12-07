@@ -20,8 +20,9 @@ class Day06Part2 : LinesPuzzle() {
 //                    cnt++
 //                }
 //            }
-            val p1 = ((- time + Math.sqrt(1.0*time*time-4*distance))/ -2).toLong()
-            val p2 = ((- time - Math.sqrt(1.0*time*time-4*distance))/ -2).toLong()
+            val distanceToWin = distance.toDouble() + 0.00001
+            val p1 = ((- time + Math.sqrt(1.0*time*time-4*distanceToWin))/ -2).toLong()
+            val p2 = ((- time - Math.sqrt(1.0*time*time-4*distanceToWin))/ -2).toLong()
             val cnt = Math.abs(p1-p2)
             factor*=cnt
         }
