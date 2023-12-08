@@ -3,10 +3,10 @@ package utils
 import java.util.*
 
 class AStar<E: AStar.Edge> {
-    fun findPath(begin: Vertex<E>): VertexWithCost<E> {
-        val priorityQueue = PriorityQueue<VertexWithCost<E>>()
+    fun findPath(begin: Vertex<E>): VertexWithCost {
+        val priorityQueue = PriorityQueue<VertexWithCost>()
 
-        var currentVertex = VertexWithCost.forStart(begin)
+        var currentVertex = forStart(begin)
         while (priorityQueue.isNotEmpty()) {
             // Check if we have reached the finish
             if (currentVertex.isGoal) {
@@ -20,8 +20,8 @@ class AStar<E: AStar.Edge> {
         }
         throw IllegalArgumentException("No Path")
     }
-    fun traversePath(goal: VertexWithCost<E>) :AStarResul<E>{
-        var current :VertexWithCost<E>? = goal
+    fun traversePath(goal: VertexWithCost) :AStarResul{
+        var current :VertexWithCost? = goal
         val edgeList = mutableListOf<E>()
         while(current?.previous != null){
             val edge = current.edge
@@ -33,32 +33,30 @@ class AStar<E: AStar.Edge> {
         return AStarResul(goal, edgeList.reversed())
     }
 
-    class VertexWithCost<E: Edge> private constructor(val vertex: Vertex<E>, val cost: Long, val previous: VertexWithCost<E>?, val edge: E?) :
-        Comparable<VertexWithCost<E>> {
+    inner class VertexWithCost constructor(val vertex: Vertex<E>, val cost: Long, val previous: VertexWithCost?, val edge: E?) :
+        Comparable<VertexWithCost> {
         val estimatedTotalCost = cost + vertex.heuristic()
         val isGoal get() = vertex.isGoal()
 
-        override fun compareTo(other: VertexWithCost<E>): Int {
+        override fun compareTo(other: VertexWithCost): Int {
             return estimatedTotalCost.compareTo(other.estimatedTotalCost)
         }
 
-        fun getNextVertices(): List<VertexWithCost<E>> {
+        fun getNextVertices(): List<VertexWithCost> {
             return vertex.getEdges().map {
                 traverse(it)
             }
         }
 
-        fun traverse(edge: E): VertexWithCost<E> {
+        fun traverse(edge: E): VertexWithCost {
             return forEdge(this.vertex.applyEdge(edge), cost + edge.cost, this, edge)
         }
 
-        companion object {
-            fun <E: Edge>forStart(vertex: Vertex<E>) = VertexWithCost<E>(vertex, 0L, null, null)
-            fun <E: Edge>forEdge(vertex: Vertex<E>, cost: Long, previous: VertexWithCost<E>, edge: E) = VertexWithCost(vertex, cost, previous, edge)
-        }
     }
+    fun forStart(vertex: Vertex<E>) = VertexWithCost(vertex, 0L, null, null)
+    fun forEdge(vertex: Vertex<E>, cost: Long, previous: VertexWithCost, edge: E) = VertexWithCost(vertex, cost, previous, edge)
 
-    data class AStarResul<E: Edge>(val goal: VertexWithCost<E>, val path: List<E>)
+    inner class AStarResul(val goal: VertexWithCost, val path: List<E>)
 
     interface Vertex<E: Edge> {
         fun heuristic(): Long
