@@ -10,10 +10,10 @@ class Day08Part2 : LinesPuzzle() {
             val node = Node.from(lines[i])
             mymap[node.name] = node
         }
-        var starts = mymap.values.filter { it.isStart }.toSet()
-        var targets = mymap.values.filter { it.isTarget }.toSet()
+        val starts = mymap.values.filter { it.isStart }.toSet()
+        val targets = mymap.values.filter { it.isTarget }.toSet()
 
-        var distances = mutableMapOf<Node,MutableMap<Node,Long>>()
+        val distances = mutableMapOf<Node,MutableMap<Node,Long>>()
 
         for (start in starts){
             for(target in targets){
