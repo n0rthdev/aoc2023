@@ -6,7 +6,7 @@ import java.net.URI
 
 class Setup {
 
-    val DAY_TO_SETUP = 6
+    val DAY_TO_SETUP = 8
 
     @Test
     fun startDayPart1() {
