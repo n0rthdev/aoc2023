@@ -2,7 +2,9 @@ package utils
 
 import kotlin.math.roundToLong
 
-class Vector3D(val x: Long, val y: Long, val z: Long) {
+data class Vector3D(val x: Long, val y: Long, val z: Long) {
+
+    constructor(x: Int, y: Int, z: Int) : this(x.toLong(), y.toLong(), z.toLong())
 
     operator fun unaryMinus(): Vector3D {
         return Vector3D(-x, -y, -z)
@@ -72,6 +74,12 @@ class Vector3D(val x: Long, val y: Long, val z: Long) {
         val LEFT = -X_ONE
         val FORWARD = Y_ONE
         val BACKWARD = -Y_ONE
+
+        val NORTH = FORWARD
+        val SOUTH = BACKWARD
+        val EAST = RIGHT
+        val WEST = LEFT
+
         val UP = Z_ONE
         val DOWN = -Z_ONE
 
@@ -84,7 +92,8 @@ class Vector3D(val x: Long, val y: Long, val z: Long) {
         val Directions3d = DirectionsX + DirectionsY + DirectionsZ
 
         val Directions2dWithDiagonals = Directions2d + DirectionsX.flatMap { x -> DirectionsY.map { y -> x + y } }
-        val Directions3dWithDiagonals = Directions3d + DirectionsX.flatMap { x -> DirectionsY.flatMap { y -> DirectionsZ.map { z -> x + y + z } }}
+        val Directions3dWithDiagonals =
+            Directions3d + DirectionsX.flatMap { x -> DirectionsY.flatMap { y -> DirectionsZ.map { z -> x + y + z } } }
 
 
         fun fromString(str: String, separator: String = ",", dim: Int = 3): Vector3D {
@@ -99,9 +108,16 @@ class Vector3D(val x: Long, val y: Long, val z: Long) {
 
         }
 
-        class DirectionParser(val right : String,val left : String, val forward : String, val backward : String, val up:String,val down: String){
-            fun parse(str:String):Vector3D{
-                return when(str){
+        class DirectionParser(
+            val right: String,
+            val left: String,
+            val forward: String,
+            val backward: String,
+            val up: String,
+            val down: String
+        ) {
+            fun parse(str: String): Vector3D {
+                return when (str) {
                     right -> RIGHT
                     left -> LEFT
                     forward -> FORWARD
@@ -111,8 +127,9 @@ class Vector3D(val x: Long, val y: Long, val z: Long) {
                     else -> throw IllegalArgumentException("String $str is not parsable")
                 }
             }
-            companion object{
-                fun fromChars(chars:String = "RLFBUD"){
+
+            companion object {
+                fun fromChars(chars: String = "RLFBUD") {
                     val strings = chars.map { it.toString() }
                     DirectionParser(
                         strings[0],
