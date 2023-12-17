@@ -5,15 +5,20 @@ import java.util.*
 class AStar<E: AStar.Edge> {
     fun findPath(begin: Vertex<E>): VertexWithCost {
         val priorityQueue = PriorityQueue<VertexWithCost>()
+        val vistied = mutableSetOf<Vertex<E>>()
+        priorityQueue.add(forStart(begin))
 
-        var currentVertex = forStart(begin)
         while (priorityQueue.isNotEmpty()) {
+            val currentVertex = priorityQueue.remove()
+            if(vistied.contains(currentVertex.vertex)){
+                continue
+            }
+            vistied.add(currentVertex.vertex)
             // Check if we have reached the finish
             if (currentVertex.isGoal) {
                 // Backtrack to generate the most efficient path
                 return currentVertex
             }
-            currentVertex = priorityQueue.remove()
 
             val newVertices = currentVertex.getNextVertices()
             priorityQueue.addAll(newVertices)
