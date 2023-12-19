@@ -11,8 +11,6 @@ class Grid<T>(val lineData: List<List<T>>) {
         return columData[j]
     }
 
-
-
     fun rowsMatch(i: Int, j: Int, match: (List<T>, List<T>) -> Boolean = { a, b -> a == b }): Boolean {
         return match(getRow(i), getRow(j))
     }

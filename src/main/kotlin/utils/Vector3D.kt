@@ -26,6 +26,10 @@ data class Vector3D(val x: Long, val y: Long, val z: Long) {
         return Vector3D(x * times, y * times, z * times)
     }
 
+    operator fun times(times: Int): Vector3D {
+        return times(times.toLong())
+    }
+
     operator fun div(div: Long): Vector3D {
         return Vector3D(x / div, y / div, z / div)
     }
@@ -53,6 +57,33 @@ data class Vector3D(val x: Long, val y: Long, val z: Long) {
 
     fun gridDistance(): Long {
         return abs().max()
+    }
+
+    fun inCube(corner1: Vector3D, corner2: Vector3D): Boolean {
+        return xInRangeIncluding(corner1.x, corner2.x) &&
+                yInRangeIncluding(corner1.y, corner2.y) &&
+                zInRangeIncluding(corner1.z, corner2.z)
+    }
+
+    fun xInRangeIncluding(x1: Long, x2: Long): Boolean {
+        val min = Math.min(x1, x2)
+        val max = Math.max(x1, x2)
+
+        return min <= x && x <= max
+    }
+
+    fun yInRangeIncluding(y1: Long, y2: Long): Boolean {
+        val min = Math.min(y1, y2)
+        val max = Math.max(y1, y2)
+
+        return min <= y && y <= max
+    }
+
+    fun zInRangeIncluding(z1: Long, z2: Long): Boolean {
+        val min = Math.min(z1, z2)
+        val max = Math.max(z1, z2)
+
+        return min <= z && z <= max
     }
 
     fun abs() = Vector3D(Math.abs(x), Math.abs(y), Math.abs(z))
@@ -116,6 +147,10 @@ data class Vector3D(val x: Long, val y: Long, val z: Long) {
             val up: String,
             val down: String
         ) {
+            fun parse(ch: Char): Vector3D {
+                return parse(ch.toString())
+            }
+
             fun parse(str: String): Vector3D {
                 return when (str) {
                     right -> RIGHT
@@ -129,9 +164,9 @@ data class Vector3D(val x: Long, val y: Long, val z: Long) {
             }
 
             companion object {
-                fun fromChars(chars: String = "RLFBUD") {
+                fun fromChars(chars: String = "RLFBUD"): DirectionParser {
                     val strings = chars.map { it.toString() }
-                    DirectionParser(
+                    return DirectionParser(
                         strings[0],
                         strings[1],
                         strings[2],
